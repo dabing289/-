@@ -92,22 +92,24 @@ delay 1000
 
 //判断最后一页是不是YP,如果是，就删除
 AB=Plugin.Color.FindMutiColor(34,810,224,957,"F0B000","-3|22|50D092,-3|22|50D092,-24|16|289461,72|10|A87C00",1)
-dim MyArray
-MyArray = Split(AB, "|")
-A = CInt(MyArray(0)): B = CInt(MyArray(1))
+dim MyArray1
+MyArray1 = Split(AB, "|")
+A = CInt(MyArray1(0)): B = CInt(MyArray1(1))
+	
+	If A > 0 and B > 0 Then 
+	MsgBox "是YP页面,坐标是" & A & "," & B
+	Delay 1000
+	
 
-If A > 0 and B > 0 Then 
-MsgBox "是YP页面,坐标是" & A & "," & B
-delay 1000
-Move to 34,810
-LeftClick 1
-delay 500
-LeftClick 1
-
-delay 1000
-KeyPress "Delete", 1
-
-End If
+	MoveTo 34,810
+	LeftClick 1
+	delay 500
+	LeftClick 1
+	
+	delay 1000
+	KeyPress "Delete", 1
+	
+	End If
 
 
 
