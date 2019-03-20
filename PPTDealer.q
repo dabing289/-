@@ -50,19 +50,66 @@ Function 打开文件(WholePath)
 Call RunApp(WholePath)
 
 TracePrint "打开文件"
-
+Delay 3000
+// window max(press alt + space then press X)
+KeyDown 18, 1
+KeyPress "Space", 1
+KeyUp 18, 1
+Delay 1000
+KeyPress "X", 1
+Delay 1000
+TracePrint "最大化"
 
 End Function
 
 Function 操作 ()
 //判断文件是否打开
+X = - 2 
+Y = - 2 
+
+
+Do While (X<0 and Y<0)
+TracePrint "X|Y="&X&"|"&Y
+XY=Plugin.Color.FindMutiColor(7,168,26,191,"4D68D6","1|6|4D68D6",1)
+dim MyArray
+MyArray = Split(XY, "|")
+X = CInt(MyArray(0)): Y = CInt(MyArray(1))
+
+If X > 0 and Y > 0 Then 
+MsgBox "文件已经打开，坐标位置：" & X & "," & Y
+
+Exit Do	
+End If
+
+Loop
+
+
 Delay 1000
 KeyPress "End", 1
 Delay 1000
+delay 1000
+delay 1000
 
-//判断最后一页是不是优品,Move to 
+//判断最后一页是不是YP,如果是，就删除
+AB=Plugin.Color.FindMutiColor(34,810,224,957,"F0B000","-3|22|50D092,-3|22|50D092,-24|16|289461,72|10|A87C00",1)
+dim MyArray
+MyArray = Split(AB, "|")
+A = CInt(MyArray(0)): B = CInt(MyArray(1))
 
+If A > 0 and B > 0 Then 
+MsgBox "是YP页面,坐标是" & A & "," & B
+delay 1000
+Move to 34,810
 LeftClick 1
+delay 500
+LeftClick 1
+
+delay 1000
+KeyPress "Delete", 1
+
+End If
+
+
 
 
 
@@ -85,10 +132,5 @@ End Function
 Function 移动文件(Opath,TargetPath,Filename)
 delay 1000
 Call Plugin.File.MoveFile(Opath & "\" & Filename, Targetpath & "\" & Filename)
-
-
-
-
-
 TracePrint "移动了文件"
 End Function
